@@ -532,7 +532,7 @@ end
 
 
 
-local sa, ad, gv, sv, us =
+local sa, ad, us =
 	Material("icon16/user_suit.png"),
 	Material("icon16/shield.png"),
 	nil
