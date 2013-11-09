@@ -1,11 +1,3 @@
-hook.Add("vScoreboard_FetchTeamColor", "Standard team colors", function(t)
-	if type(t) == "number" and team.Valid(t) then
-		return team.GetColor(t)
-	end
-end)
-
-
-
 if SERVER then
 	resource.AddFile "materials/vscoreboard/webdings_muter_off.png"
 	resource.AddFile "materials/vscoreboard/webdings_muter_on.png"
@@ -19,6 +11,14 @@ end
 
 local btn_mute = Material "vscoreboard/webdings_muter_off.png"
 local btn_unmute = Material "vscoreboard/webdings_muter_on.png"
+
+
+
+hook.Add("vScoreboard_FetchTeamColor", "Standard team colors", function(t)
+	if type(t) == "number" and team.Valid(t) then
+		return team.GetColor(t)
+	end
+end)
 
 
 
