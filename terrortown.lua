@@ -45,6 +45,24 @@ end)
 
 
 hook.Add("vScoreboard_PopulateColumns", "TTT shenanigans", function(cols, add)
+	add {
+		Name = "Rounds left",
+		Width = { "Rounds left: 0000" },
+
+		_INFO = true,
+
+		Think = function(lbl)
+			local rl = math_max(0, GetGlobalInt("ttt_rounds_left", 6))
+
+			if rl ~= lbl.Orl then
+				lbl.Orl = rl
+
+				lbl:SetText("Rounds left: " .. tostring(rl))
+				lbl:SizeToContents()
+			end
+		end
+	}
+
 	if KARMA.IsEnabled() then
 		add {
 			Name = "Karma",
