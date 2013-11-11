@@ -8,17 +8,17 @@ local doNothing = function() end
 
 
 
-hook.Add("ScoreboardShow", "FAdmin_scoreboard", function()
+vScoreboard.hook.Add("ScoreboardShow", "FAdmin_scoreboard", function()
 	--	Nope.
 end)
 
-hook.Add("ScoreboardHide", "FAdmin_scoreboard", function()
+vScoreboard.hook.Add("ScoreboardHide", "FAdmin_scoreboard", function()
 	--	Nope!
 end)
 
 
 
-hook.Add("vScoreboard_PopulateColumns", "DarkRP shenanigans", function(cols, add)
+vScoreboard.hook.Add("vScoreboard_PopulateColumns", "DarkRP shenanigans", function(cols, add)
 	add {
 		Name = "Wanted",
 		Width = { "Wanted", "WANTED", "wanted" },
@@ -50,7 +50,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulatePlayerProperties_AddInfo", "DarkRP shenanigans", function(ply, ctrls, add)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties_AddInfo", "DarkRP shenanigans", function(ply, ctrls, add)
 	local localply = LocalPlayer()
 	local reflected, isBot = localply == ply, ply:IsBot()
 	local sid, sid64 = tostring(ply:SteamID() or "none"), tostring(ply:SteamID64() or "none")
@@ -102,7 +102,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulatePlayerProperties", "DarkRP shenanigans", function(ply, ctrls, add)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "DarkRP shenanigans", function(ply, ctrls, add)
 	local localply = LocalPlayer()
 	local reflected, isBot = localply == ply, ply:IsBot()
 	local sid, sid64 = tostring(ply:SteamID() or "none"), tostring(ply:SteamID64() or "none")
@@ -167,7 +167,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulatePlayerCard", "DarkRP_Wanted", function(self)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerCard", "DarkRP_Wanted", function(self)
 	--[[local lbl = vgui.Create("DLabel", self.Bottom)
 	lbl:Dock(RIGHT)
 	lbl:SetFont(vScoreboard.RankFont)

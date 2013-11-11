@@ -1,12 +1,16 @@
 local grpassoc, grpassoc2 = {}, {}
 
-hook.Add("vScoreboard_FetchPlayerTeam", "TTT teams", function(ply)
+vScoreboard.hook.Add("vScoreboard_FetchPlayerTeam", "TTT teams", function(ply)
 	local grp = ScoreGroup(ply)
 
 	if not grp then return end
 
 	if grpassoc[grp] then
 		return grpassoc[grp]
+	end
+
+	if not LANG.GetUnsafeLanguageTable() then
+		MsgN "FUCKUP OMG"
 	end
 
 	if grp == GROUP_TERROR then
@@ -26,7 +30,7 @@ hook.Add("vScoreboard_FetchPlayerTeam", "TTT teams", function(ply)
 	return grpassoc[grp]
 end)
 
-hook.Add("vScoreboard_FetchTeamColor", "TTT team colors", function(t)
+vScoreboard.hook.Add("vScoreboard_FetchTeamColor", "TTT team colors", function(t)
 	local tttt = grpassoc2[t]
 
 	if not tttt then return end
@@ -44,7 +48,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulateColumns", "TTT shenanigans", function(cols, add)
+vScoreboard.hook.Add("vScoreboard_PopulateColumns", "TTT shenanigans", function(cols, add)
 	add {
 		Name = "Rounds left",
 		Width = { "Rounds left: 0000" },
@@ -71,7 +75,7 @@ hook.Add("vScoreboard_PopulateColumns", "TTT shenanigans", function(cols, add)
 			Content = function(self)
 				local lbl = vgui.Create("DLabel", self)
 				lbl:SetText("")
-				lbl:SetFont(vScoreboard.RankFont)
+				lbl:SetFont(vScoreboard.ColumnFont)
 				lbl:SetContentAlignment(5)
 
 				local check = CurTime()
@@ -99,7 +103,7 @@ hook.Add("vScoreboard_PopulateColumns", "TTT shenanigans", function(cols, add)
 		Content = function(self)
 			local lbl = vgui.Create("DLabel", self)
 			lbl:SetText("")
-			lbl:SetFont(vScoreboard.RankFont)
+			lbl:SetFont(vScoreboard.ColumnFont)
 			lbl:SetContentAlignment(5)
 
 			local check = CurTime()
@@ -126,7 +130,7 @@ hook.Add("vScoreboard_PopulateColumns", "TTT shenanigans", function(cols, add)
 		Content = function(self)
 			local lbl = vgui.Create("DLabel", self)
 			lbl:SetText("")
-			lbl:SetFont(vScoreboard.RankFont)
+			lbl:SetFont(vScoreboard.ColumnFont)
 			lbl:SetContentAlignment(5)
 
 			local check = CurTime()
@@ -153,7 +157,7 @@ hook.Add("vScoreboard_PopulateColumns", "TTT shenanigans", function(cols, add)
 		Content = function(self)
 			local lbl = vgui.Create("DLabel", self)
 			lbl:SetText("")
-			lbl:SetFont(vScoreboard.RankFont)
+			lbl:SetFont(vScoreboard.ColumnFont)
 			lbl:SetContentAlignment(5)
 
 			local check = CurTime()
@@ -180,7 +184,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulatePlayerCard", "TTT shenanigans", function(self)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerCard", "TTT shenanigans", function(self)
 	local oP = self.Paint
 
 	function self:Paint(w, h)
@@ -222,7 +226,7 @@ local tags = {
 
 
 
-hook.Add("vScoreboard_PopulatePlayerProperties_AddInfo", "TTT shenanigans", function(ply, ctrls, add)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties_AddInfo", "TTT shenanigans", function(ply, ctrls, add)
 	local localply = LocalPlayer()
 	local reflected, isBot = localply == ply, ply:IsBot()
 	local sid, sid64 = tostring(ply:SteamID() or "none"), tostring(ply:SteamID64() or "none")

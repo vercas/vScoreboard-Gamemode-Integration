@@ -14,7 +14,7 @@ local btn_unmute = Material "vscoreboard/webdings_muter_on.png"
 
 
 
-hook.Add("vScoreboard_FetchTeamColor", "Standard team colors", function(t)
+vScoreboard.hook.Add("vScoreboard_FetchTeamColor", "Standard team colors", function(t)
 	if type(t) == "number" and team.Valid(t) then
 		return team.GetColor(t)
 	end
@@ -22,7 +22,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulateColumns", "Common shenanigans", function(cols, add)
+vScoreboard.hook.Add("vScoreboard_PopulateColumns", "Common shenanigans", function(cols, add)
 	add {
 		Name = "Ping",
 		Width = { "999 II", "Ping" },
@@ -36,7 +36,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulatePlayerCard", "Common shenanigans", function(self)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerCard", "Common shenanigans", function(self)
 	--[[local btn = vgui.Create("vScoreboard_ImageButton", self.Right)
 	btn:SetImage(btn_settings)
 
@@ -48,7 +48,7 @@ end)
 
 
 
-hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans", function(ply, ctrls, add)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans", function(ply, ctrls, add)
 	local localply = LocalPlayer()
 	local reflected, isBot = localply == ply, ply:IsBot()
 	local sid, sid64 = tostring(ply:SteamID() or "none"), tostring(ply:SteamID64() or "none")
@@ -101,7 +101,7 @@ hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans", function(
 		},
 	}
 
-	hook.Run("vScoreboard_PopulatePlayerMainButtonStrip", ply, t, function(tab)
+	vScoreboard.hook.Run("vScoreboard_PopulatePlayerMainButtonStrip", ply, t, function(tab)
 		t[#t+1] = tab
 	end)
 
@@ -145,7 +145,7 @@ hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans", function(
 
 	local nao = #ctrls
 
-	hook.Run("vScoreboard_PopulatePlayerProperties_AddInfo", ply, ctrls, add)
+	vScoreboard.hook.Run("vScoreboard_PopulatePlayerProperties_AddInfo", ply, ctrls, add)
 
 	if #ctrls ~= nao then
 		add(vScoreboard.ButtonSize)
@@ -188,6 +188,20 @@ hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans", function(
 						end or nil,
 					}
 				}
+			}
+		end
+
+		if ucl.query(localply, "ulx votekick") then
+			add {
+				Type = "Button",
+				Text = "Votekick",
+
+				Disabled = reflected,
+				ToolTip = reflected and "Cannot votekick self." or nil,
+
+				Click = notReflected and function(btn)
+					RunConsoleCommand("ulx", "votekick", "$" .. ULib.getUniqueIDForPlayer(ply), "Quick votekick!")
+				end or nil,
 			}
 		end
 
@@ -399,7 +413,7 @@ hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans", function(
 			}
 		end
 
-		add(vScoreboard.ButtonSize)
+		--add(vScoreboard.ButtonSize)
 
 		if ucl.query(localply, "ulx mute") then
 			add {

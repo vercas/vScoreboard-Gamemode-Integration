@@ -4,6 +4,6 @@ end
 
 
 
-hook.Add("vScoreboard_PopulatePlayerCard", "Sandbox shenanigans", function(self)
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerCard", "Sandbox shenanigans", function(self)
 	
 end)
