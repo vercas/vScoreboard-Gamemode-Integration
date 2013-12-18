@@ -281,7 +281,7 @@ end)
 
 
 
-vScoreboard.TeamSorter = function(a, b)
+function vScoreboard.TeamSorter(a, b)
 	local a, b = grpassoc2[a], grpassoc2[b]
 
 	if a == GROUP_TERROR then
@@ -293,4 +293,20 @@ vScoreboard.TeamSorter = function(a, b)
 	else
 		return false
 	end
+end
+
+
+
+local ops = vScoreboard.PlayerSorter or function(a, b)
+	return (a:Nick()) < (b:Nick())
+end
+
+function vScoreboard.PlayerSorter(a, b)
+	if a:Frags() > b:Frags() then
+		return true
+	elseif a:Frags() < b:Frags() then
+		return false
+	end
+
+	return ops(a, b)
 end
