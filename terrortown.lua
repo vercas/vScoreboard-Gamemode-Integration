@@ -1,3 +1,7 @@
+local GetGlobalInt = GetGlobalInt
+
+
+
 local grpassoc, grpassoc2 = {}, {}
 
 vScoreboard.hook.Add("vScoreboard_FetchPlayerTeam", "TTT teams", function(ply)
@@ -310,3 +314,7 @@ function vScoreboard.PlayerSorter(a, b)
 
 	return ops(a, b)
 end
+
+
+
+vScoreboard.ShowPlayerModels = false
