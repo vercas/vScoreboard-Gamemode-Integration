@@ -86,6 +86,42 @@ else
 		}
 
 		add {
+			Name = "K/D Ratio",
+			Width = { "100.00", "K/D Ratio" },
+
+			Content = function(self)
+				local lbl = vgui.Create("DLabel", self)
+				lbl:SetText("")
+				lbl:SetFont(vScoreboard.ColumnFont)
+				lbl:SetContentAlignment(5)
+
+				local check = CurTime()
+				function lbl.Think(lbl)
+					if CurTime() - check > 1 then
+						check = CurTime()
+
+						if IsValid(self.p) then
+							if self.p:Deaths() == 0 then
+								lbl:SetText("-")
+							else
+								local rat = tostring(self.p:Frags() / self.p:Deaths())
+
+								local a, b, bef, aft = string.find(rat, "(%d*)([%.,]?%d?%d?)")
+
+								lbl:SetText(a and (bef .. aft) or rat)
+								--lbl:SetText(string.format("%.2f", self.p:Frags() / self.p:Deaths()))
+							end
+						else
+							lbl:SetText("")
+						end
+					end
+				end
+
+				return lbl
+			end
+		}
+
+		add {
 			Name = "Deaths",
 			Width = { "9999", "Deaths" },
 
