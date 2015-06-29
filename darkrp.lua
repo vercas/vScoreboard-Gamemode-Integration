@@ -8,11 +8,11 @@ local doNothing = function() end
 
 
 
-vScoreboard.hook.Add("ScoreboardShow", "FAdmin_scoreboard", function()
+hook.Add("ScoreboardShow", "FAdmin_scoreboard", function()
 	--	Nope.
 end)
 
-vScoreboard.hook.Add("ScoreboardHide", "FAdmin_scoreboard", function()
+hook.Add("ScoreboardHide", "FAdmin_scoreboard", function()
 	--	Nope!
 end)
 
