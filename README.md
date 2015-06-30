@@ -7,7 +7,7 @@ vScoreboard can be obtained [here](https://scriptfodder.com/scripts/view/1378).
 Help
 ====
 
-The [wiki](wiki) contains all the info you need, including means of contacting me.  
+The [wiki](https://github.com/vercas/vScoreboard-Gamemode-Integration/wiki) contains all the info you need, including means of contacting me.  
 
 Contributions
 =============
