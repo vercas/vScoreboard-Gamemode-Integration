@@ -1,8 +1,13 @@
-vScoreboard-Gamemode-Integration
+vScoreboard Gamemode Integration
 ================================
 
 Contains the public files used by vScoreboard to integrate with gamemodes.  
-vScoreboard can be obtained [here](https://scriptfodder.com/scripts/view/1378).
+vScoreboard can be obtained [here](https://scriptfodder.com/scripts/view/1378).  
+
+Help
+====
+
+The [wiki](wiki) contains all the info you need, including means of contacting me.  
 
 Contributions
 =============
