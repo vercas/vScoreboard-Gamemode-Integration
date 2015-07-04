@@ -520,6 +520,12 @@ end)
 
 
 
+vScoreboard.hook.Add("vScoreboard_PopulatePlayerList", "All players", function(plyAdd, plyRemove)
+	plyAdd(GetAll())
+end)
+
+
+
 function vScoreboard.PlayerSorter(a, b)
 	local x, y = 0, 0
 
@@ -546,18 +552,23 @@ end
 
 
 
-local sa, ad, us =
+local iSA, iAd, iUs =
 	Material("icon16/user_suit.png"),
 	Material("icon16/shield.png"),
 	nil
 
+local cSA, cAd, cUs =
+	Color(255, 106,   0),
+	Color(127, 201, 255),
+	nil --	Default color.
+
 function vScoreboard.GetRank(ply)
 	if ply:IsSuperAdmin() then
-		return sa, "Super Administrator"
+		return iSA, "Super Administrator", cSA
 	elseif ply:IsAdmin() then
-		return ad, "Administrator"
+		return iAd, "Administrator", cAd
 	else
-		return us, nil
+		return iUs, nil, cUs
 	end
 end
 

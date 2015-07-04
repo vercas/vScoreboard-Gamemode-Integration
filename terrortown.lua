@@ -14,7 +14,7 @@ vScoreboard.hook.Add("vScoreboard_FetchPlayerTeam", "TTT teams", function(ply)
 	end
 
 	if not LANG.GetUnsafeLanguageTable() then
-		MsgN "FUCKUP OMG"
+		MsgN "THIS IS BAD, MAN! THIS IS VERY BAD."
 	end
 
 	if grp == GROUP_TERROR then
