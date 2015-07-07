@@ -145,7 +145,7 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 
 	local nao = #ctrls
 
-	vScoreboard.hook.Run("vScoreboard_PopulatePlayerProperties_AddInfo", ply, ctrls, add)
+	vScoreboard.hook.Run("vScoreboard_PopulatePlayerProperties_AddInfo", ply, ctrls, add, localply, reflected, isBot)
 
 	if #ctrls ~= nao then
 		add(vScoreboard.ButtonSize)
@@ -158,7 +158,11 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 		local uclshizzle = {}
 		add = function(t)
 			uclshizzle[#uclshizzle+1] = t
+
+			vScoreboard.hook.Run("vScoreboard_PlayerUlxCommands_Added", ply, ctrls, add, t, localply, reflected, isBot)
 		end
+
+		vScoreboard.hook.Run("vScoreboard_PlayerUlxCommands_Before", ply, ctrls, add, localply, reflected, isBot)
 
 		if ucl.query(localply, "ulx kick") then
 			add {
@@ -189,6 +193,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					}
 				}
 			}
+		else
+			add "ulx kick"
 		end
 
 		if ucl.query(localply, "ulx votekick") then
@@ -203,6 +209,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					RunConsoleCommand("ulx", "votekick", "$" .. ULib.getUniqueIDForPlayer(ply), "Quick votekick!")
 				end or nil,
 			}
+		else
+			add "ulx votekick"
 		end
 
 		if ucl.query(localply, "ulx blind") then
@@ -231,6 +239,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					}
 				}
 			}
+		else
+			add "ulx blind"
 		end
 
 		if ucl.query(localply, "ulx cloak") then
@@ -259,6 +269,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					}
 				}
 			}
+		else
+			add "ulx cloak"
 		end
 
 		if ucl.query(localply, "ulx ignite") then
@@ -287,6 +299,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					}
 				}
 			}
+		else
+			add "ulx ignite"
 		end
 
 		local allowedToSlap = ucl.query(localply, "ulx slap")
@@ -332,6 +346,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					} or nil
 				}
 			}
+		else
+			add "ulx slap whip spectate"
 		end
 
 		local allowedToSlay = ucl.query(localply, "ulx slay")
@@ -363,6 +379,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					} or nil
 				}
 			}
+		else
+			add "ulx slay sslay"
 		end
 
 		local allowedToGoto = ucl.query(localply, "ulx goto")
@@ -411,6 +429,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					} or nil
 				}
 			}
+		else
+			add "ulx goto bring teleport"
 		end
 
 		--add(vScoreboard.ButtonSize)
@@ -441,6 +461,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					}
 				}
 			}
+		else
+			add "ulx mute"
 		end
 
 		if ucl.query(localply, "ulx gag") then
@@ -469,6 +491,8 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					}
 				}
 			}
+		else
+			add "ulx gag"
 		end
 
 		if ucl.query(localply, "ulx gimp") then
@@ -497,7 +521,11 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 					}
 				}
 			}
+		else
+			add "ulx gimp"
 		end
+
+		vScoreboard.hook.Run("vScoreboard_PlayerUlxCommands_After", ply, ctrls, add, localply, reflected, isBot)
 
 		add(vScoreboard.ButtonSize)
 
@@ -512,7 +540,9 @@ vScoreboard.hook.Add("vScoreboard_PopulatePlayerProperties", "Common shenanigans
 			}
 
 			for i = 1, #uclshizzle do
-				add(uclshizzle[i])
+				if type(uclshizzle[i]) == "table" then
+					add(uclshizzle[i])
+				end
 			end
 		end
 	end
